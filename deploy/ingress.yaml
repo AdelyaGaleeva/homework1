@@ -1,16 +1,26 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name:  homework1-ingress
+  name: homework1-ingress
   annotations:
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$1$2
     kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/app-root: /
 spec:
   rules:
     - host: arch.homework
       http:
         paths:
-          - path: /
+          - path: /otusapp/adelya-galeeva($|/)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: homework1-service
+                port:
+                  number: 9000
+          - path: /(.*)
             pathType: Prefix
             backend:
               service:

@@ -8,14 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/health12")
+@RequestMapping("/health")
 @CrossOrigin
 @Slf4j
 public class HealthController {
 
     @GetMapping
     public HeathResponse checkHealth() {
-        log.info("LLLLLLogggssss");
-        return new HeathResponse("LALAL");
+        return new HeathResponse("OK");
     }
 }
