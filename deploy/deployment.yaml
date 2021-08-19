@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: homework1-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: homework1-app
+  template:
+    metadata:
+      labels:
+        app: homework1-app
+    spec:
+      containers:
+        - name: homework1
+          image: adelka1009/homework12:v3
+          ports:
+            - name: web
+              containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: 8080
+            initialDelaySeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 8080
+            initialDelaySeconds: 10
+            timeoutSeconds: 2

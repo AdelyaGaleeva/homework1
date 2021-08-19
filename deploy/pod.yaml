@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: homework1-demo
+  labels:
+    app: homework1-demo
+spec:
+  containers:
+    - name: homework1-demo
+      image: adelka1009/homework1:v10
+      ports:
+        - containerPort: 80
